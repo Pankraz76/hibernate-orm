@@ -12,6 +12,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.file.Files;
 
 import org.hibernate.Hibernate;
 import org.hibernate.InvalidMappingException;
@@ -128,7 +129,7 @@ public class MappingExceptionTest {
 	@Test
 	public void testInvalidMapping() throws MappingException, IOException {
 		String resourceName = "org/hibernate/orm/test/mappingexception/InvalidMapping.hbm.xml";
-		File file = File.createTempFile( "TempInvalidMapping", ".hbm.xml" );
+		File file = Files.createTempFile( "TempInvalidMapping", ".hbm.xml" ).toFile();
 		file.deleteOnExit();
 		copy( ConfigHelper.getConfigStream( resourceName ), file );
 

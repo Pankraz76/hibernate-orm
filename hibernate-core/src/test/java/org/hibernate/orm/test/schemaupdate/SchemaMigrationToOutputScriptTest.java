@@ -52,7 +52,7 @@ public class SchemaMigrationToOutputScriptTest {
 
 	@BeforeEach
 	public void setUp() throws Exception {
-		output = File.createTempFile( "creation_script", ".sql" );
+		output = Files.createTempFile( "creation_script", ".sql" ).toFile();
 		output.deleteOnExit();
 
 		List<String> content = Arrays.asList(

@@ -45,9 +45,9 @@ public class SchemaUpdateWithUseJdbcMetadataDefaultsSettingToFalseTest {
 	private MetadataImplementor metadata;
 
 	public void setUp(String jdbcMetadataExtractorStrategy) throws IOException {
-		createOutputFile = File.createTempFile( "create_script", ".sql" );
+		createOutputFile = Files.createTempFile( "create_script", ".sql" ).toFile();
 		createOutputFile.deleteOnExit();
-		updateOutputFile = File.createTempFile( "update_script", ".sql" );
+		updateOutputFile = Files.createTempFile( "update_script", ".sql" ).toFile();
 		updateOutputFile.deleteOnExit();
 		ssr = ServiceRegistryUtil.serviceRegistryBuilder()
 				.applySetting( "hibernate.temp.use_jdbc_metadata_defaults", "false" )

@@ -70,7 +70,7 @@ public class SelectGeneratorTest {
 	@Test
 	@JiraKey("HHH-15900")
 	public void testGeneratedKeyNotIdentityColumn(SessionFactoryScope scope) throws IOException {
-		File output = File.createTempFile( "schema_export", ".sql" );
+		File output = Files.createTempFile( "schema_export", ".sql" ).toFile();
 		output.deleteOnExit();
 
 		final SchemaExport schemaExport = new SchemaExport();

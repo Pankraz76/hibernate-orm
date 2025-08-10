@@ -59,7 +59,7 @@ public class HANASchemaMigrationTargetScriptCreationTest extends BaseCoreFunctio
 	@Override
 	protected void configure(Configuration configuration) {
 		try {
-			this.output = File.createTempFile( "update_script", ".sql" );
+			this.output = Files.createTempFile( "update_script", ".sql" ).toFile();
 		}
 		catch (IOException e) {
 			fail( e.getMessage() );

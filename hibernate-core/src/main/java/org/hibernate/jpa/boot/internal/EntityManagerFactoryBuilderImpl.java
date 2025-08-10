@@ -1066,9 +1066,6 @@ public class EntityManagerFactoryBuilderImpl implements EntityManagerFactoryBuil
 					DEPRECATION_LOGGER.deprecatedSetting( JPA_JDBC_DRIVER, JAKARTA_JDBC_DRIVER );
 				}
 				applyJdbcSettings( url, driver, integrationSettingsCopy, mergedSettings );
-				// EARLY EXIT!!
-				//noinspection UnnecessaryReturnStatement
-				return;
 			}
 		}
 

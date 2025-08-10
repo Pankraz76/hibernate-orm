@@ -39,7 +39,7 @@ public class TestSpatialSchemaGeneration {
 
 	@BeforeEach
 	public void setup() throws IOException {
-		output = File.createTempFile( "update_script", ".sql" );
+		output = Files.createTempFile( "update_script", ".sql" ).toFile();
 		output.deleteOnExit();
 	}
 

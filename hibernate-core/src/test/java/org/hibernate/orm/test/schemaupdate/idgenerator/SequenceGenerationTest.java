@@ -50,7 +50,7 @@ public class SequenceGenerationTest extends BaseUnitTestCase {
 		ssr = ServiceRegistryUtil.serviceRegistryBuilder()
 				.applySetting( Environment.HBM2DDL_AUTO, "none" )
 				.build();
-		output = File.createTempFile( "update_script", ".sql" );
+		output = Files.createTempFile( "update_script", ".sql" ).toFile();
 		output.deleteOnExit();
 		metadata = (MetadataImplementor) new MetadataSources( ssr )
 				.addAnnotatedClass( TestEntity.class )

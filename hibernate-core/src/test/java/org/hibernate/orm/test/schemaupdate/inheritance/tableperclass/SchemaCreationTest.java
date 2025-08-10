@@ -42,7 +42,7 @@ public class SchemaCreationTest {
 
 	@Before
 	public void setUp() throws IOException {
-		output = File.createTempFile( "update_script", ".sql" );
+		output = Files.createTempFile( "update_script", ".sql" ).toFile();
 		output.deleteOnExit();
 		ssr = ServiceRegistryUtil.serviceRegistry();
 		dialect = ssr.getService(JdbcEnvironment.class).getDialect();

@@ -10,7 +10,6 @@ import java.net.URI;
 import java.nio.file.FileSystem;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Map;
 
 class CodeSource implements Closeable {
@@ -26,7 +25,7 @@ class CodeSource implements Closeable {
 			return new CodeSource( fs, fs.getRootDirectories().iterator().next() );
 		}
 		else if ( "file".equals( location.getScheme() ) ) {
-			return new CodeSource( null, Paths.get( location ) );
+			return new CodeSource( null, Path.of( location ) );
 		}
 		else {
 			throw new IllegalArgumentException( "Unsupported URI: " + location );

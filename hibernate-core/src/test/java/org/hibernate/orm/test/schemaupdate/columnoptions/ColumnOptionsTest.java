@@ -68,7 +68,7 @@ public class ColumnOptionsTest {
 
 	@BeforeEach
 	public void setUp() throws IOException {
-		output = File.createTempFile( "update_script", ".sql" );
+		output = Files.createTempFile( "update_script", ".sql" ).toFile();
 		output.deleteOnExit();
 		ssr = ServiceRegistryUtil.serviceRegistry();
 	}

@@ -57,8 +57,8 @@ public class SchemaCreateDropUtf8WithoutHbm2DdlCharsetNameTest {
 
 	@BeforeEach
 	public void setUp() throws IOException {
-		createSchema = File.createTempFile( "create_schema", ".sql" );
-		dropSchema = File.createTempFile( "drop_schema", ".sql" );
+		createSchema = Files.createTempFile( "create_schema", ".sql" ).toFile();
+		dropSchema = Files.createTempFile( "drop_schema", ".sql" ).toFile();
 		createSchema.deleteOnExit();
 		dropSchema.deleteOnExit();
 

@@ -45,7 +45,7 @@ public class SequenceGeneratorIncrementTest {
 
 	@BeforeEach
 	public void setUp() throws Exception {
-		output = File.createTempFile( "update_script", ".sql" );
+		output = Files.createTempFile( "update_script", ".sql" ).toFile();
 		output.deleteOnExit();
 	}
 

@@ -46,7 +46,7 @@ public class SqlServerQuoteSchemaTest extends BaseCoreFunctionalTestCase {
 	@Override
 	protected void afterSessionFactoryBuilt() {
 		try {
-			output = File.createTempFile( "update_script", ".sql" );
+			output = Files.createTempFile( "update_script", ".sql" ).toFile();
 			output.deleteOnExit();
 		}
 		catch (IOException ignore) {

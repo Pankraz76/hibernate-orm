@@ -92,7 +92,7 @@ public class AlterTableQuoteDefaultSchemaTest extends AbstractAlterTableQuoteSch
 
 	@Test
 	public void testDefaultSchema() throws IOException {
-		File output = File.createTempFile( "update_script", ".sql" );
+		File output = Files.createTempFile( "update_script", ".sql" ).toFile();
 		output.deleteOnExit();
 
 		StandardServiceRegistry ssr = ServiceRegistryUtil.serviceRegistryBuilder()

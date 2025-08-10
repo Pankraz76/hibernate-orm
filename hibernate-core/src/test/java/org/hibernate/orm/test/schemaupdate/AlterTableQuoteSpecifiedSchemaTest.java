@@ -91,7 +91,7 @@ public class AlterTableQuoteSpecifiedSchemaTest extends AbstractAlterTableQuoteS
 
 	@Test
 	public void testSpecifiedSchema() throws IOException {
-		File output = File.createTempFile( "update_script", ".sql" );
+		File output = Files.createTempFile( "update_script", ".sql" ).toFile();
 		output.deleteOnExit();
 
 		StandardServiceRegistry ssr = ServiceRegistryUtil.serviceRegistryBuilder()

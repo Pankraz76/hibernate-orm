@@ -9,7 +9,6 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 
 /**
  * @author Steve Ebersole
@@ -22,7 +21,7 @@ public class Copier {
 		}
 
 		try {
-			final Path sourceProjectDir = Paths.get( resource.toURI() );
+			final Path sourceProjectDir = Path.of( resource.toURI() );
 			copyDirectory( sourceProjectDir.getParent(), target );
 		}
 		catch (URISyntaxException e) {

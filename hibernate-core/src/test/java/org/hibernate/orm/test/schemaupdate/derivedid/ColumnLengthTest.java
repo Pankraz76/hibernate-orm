@@ -48,7 +48,7 @@ public class ColumnLengthTest extends BaseUnitTestCase {
 
 	@Before
 	public void setUp() throws Exception {
-		outputFile = File.createTempFile( "update_script", ".sql" );
+		outputFile = Files.createTempFile( "update_script", ".sql" ).toFile();
 		outputFile.deleteOnExit();
 
 		ssr = ServiceRegistryUtil.serviceRegistryBuilder()

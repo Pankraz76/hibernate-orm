@@ -57,7 +57,7 @@ public class PostgreSQLMultipleSchemaSequenceTest extends BaseUnitTestCase {
 
 	@Before
 	public void setUp() throws IOException {
-		output = File.createTempFile( "update_script", ".sql" );
+		output = Files.createTempFile( "update_script", ".sql" ).toFile();
 		output.deleteOnExit();
 	}
 

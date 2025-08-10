@@ -9,6 +9,7 @@ import static org.junit.Assert.fail;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.EnumSet;
 
 import jakarta.persistence.Entity;
@@ -52,7 +53,7 @@ public class SchemaUpdateHaltOnErrorTest {
 
 	@Before
 	public void setUp() throws IOException {
-		File output = File.createTempFile("update_script", ".sql");
+		File output = Files.createTempFile( "update_script", ".sql" ).toFile();
 		output.deleteOnExit();
 		ssr = ServiceRegistryUtil.serviceRegistry();
 

@@ -127,7 +127,7 @@ public class SchemaExportTest extends BaseUnitTestCase {
 	@JiraKey(value = "HHH-10678")
 	@RequiresDialectFeature( value = DialectChecks.SupportSchemaCreation.class)
 	public void testHibernateMappingSchemaPropertyIsNotIgnored() throws Exception {
-		File output = File.createTempFile( "update_script", ".sql" );
+		File output = Files.createTempFile( "update_script", ".sql" ).toFile();
 		output.deleteOnExit();
 
 		final MetadataImplementor metadata = (MetadataImplementor) new MetadataSources( serviceRegistry )

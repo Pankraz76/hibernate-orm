@@ -52,7 +52,7 @@ public class SchemaMigrationTargetScriptCreationTest extends BaseCoreFunctionalT
 	@Override
 	protected void configure(Configuration configuration) {
 		try {
-			output = File.createTempFile( "update_script", ".sql" );
+			output = Files.createTempFile( "update_script", ".sql" ).toFile();
 		}
 		catch (IOException e) {
 			fail( e.getMessage() );

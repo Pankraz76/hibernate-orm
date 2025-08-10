@@ -42,7 +42,7 @@ public class SpannerSchemaCreationColumnTypesTest {
 
 	@BeforeEach
 	public void setUp() throws IOException {
-		output = File.createTempFile( "create_script", ".sql" );
+		output = Files.createTempFile( "create_script", ".sql" ).toFile();
 		output.deleteOnExit();
 		ssr = ServiceRegistryUtil.serviceRegistryBuilder()
 				.applySetting( AvailableSettings.KEYWORD_AUTO_QUOTING_ENABLED, "true" )

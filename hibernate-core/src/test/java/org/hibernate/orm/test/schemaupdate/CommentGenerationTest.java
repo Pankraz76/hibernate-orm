@@ -40,7 +40,7 @@ public class CommentGenerationTest {
 				.applySetting( Environment.HBM2DDL_AUTO, "none" )
 				.build();
 		try {
-			File output = File.createTempFile( "update_script", ".sql" );
+			File output = Files.createTempFile( "update_script", ".sql" ).toFile();
 			output.deleteOnExit();
 
 			final MetadataImplementor metadata = (MetadataImplementor) new MetadataSources( ssr )

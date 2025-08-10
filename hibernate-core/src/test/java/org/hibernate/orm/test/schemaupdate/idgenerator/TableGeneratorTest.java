@@ -53,7 +53,7 @@ public class TableGeneratorTest extends BaseUnitTestCase {
 				.applySetting( Environment.HBM2DDL_AUTO, "none" )
 				.build();
 
-		output = File.createTempFile( "update_script", ".sql" );
+		output = Files.createTempFile( "update_script", ".sql" ).toFile();
 		output.deleteOnExit();
 
 		metadata = (MetadataImplementor) new MetadataSources( ssr )

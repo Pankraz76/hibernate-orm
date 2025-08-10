@@ -6,6 +6,7 @@ package org.hibernate.orm.test.tool.schema;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.Properties;
 
 import org.hibernate.boot.registry.BootstrapServiceRegistry;
@@ -35,8 +36,8 @@ public class SchemaGenetationSciptsActionPropertyValueEndingWithSpaceTest extend
 			BootstrapServiceRegistry bootRegistry,
 			Configuration configuration) {
 		try {
-			dropOutput = File.createTempFile( "drop_script", ".sql" );
-			createOutput = File.createTempFile( "create_script", ".sql" );
+			dropOutput = Files.createTempFile( "drop_script", ".sql" ).toFile();
+			createOutput = Files.createTempFile( "create_script", ".sql" ).toFile();
 			dropOutput.deleteOnExit();
 			createOutput.deleteOnExit();
 		}

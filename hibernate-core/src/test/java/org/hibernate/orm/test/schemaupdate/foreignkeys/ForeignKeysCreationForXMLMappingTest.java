@@ -32,7 +32,7 @@ public class ForeignKeysCreationForXMLMappingTest {
 
 	@Test
 	public void testForeignKeyCreation() throws Exception {
-		File output = File.createTempFile( "person_fk_script", ".sql" );
+		File output = Files.createTempFile( "person_fk_script", ".sql" ).toFile();
 		output.deleteOnExit();
 		StandardServiceRegistry ssr = ServiceRegistryUtil.serviceRegistry();
 		try {
