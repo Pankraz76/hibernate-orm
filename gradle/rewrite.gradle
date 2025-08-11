@@ -2,21 +2,21 @@ apply plugin: 'org.openrewrite.rewrite'
 
 rewrite {
     // immense
-    //activeRecipe("org.openrewrite.java.RemoveUnusedImports")
     //activeRecipe("org.openrewrite.java.migrate.UpgradeToJava17")
     //activeRecipe("org.openrewrite.staticanalysis.RemoveUnusedLocalVariables")
     //activeRecipe("org.openrewrite.staticanalysis.RemoveUnusedPrivateFields")
-    //activeRecipe("org.openrewrite.staticanalysis.RemoveUnusedPrivateMethods")
     //activeRecipe("org.openrewrite.staticanalysis.UnnecessaryParentheses") why spotless dull?
+    //activeRecipe("org.openrewrite.staticanalysis.UnnecessaryCloseInTryWithResources")
+    //activeRecipe("org.openrewrite.staticanalysis.UnnecessaryReturnAsLastStatement")
+    //activeRecipe("tech.picnic.errorprone.refasterrules.FileRulesRecipes")
     //activeRecipe("tech.picnic.errorprone.refasterrules.BugCheckerRulesRecipes")
     //activeRecipe("tech.picnic.errorprone.refasterrules.SuggestedFixRulesRecipes")
     // bug
     //activeRecipe("org.openrewrite.staticanalysis.NoToStringOnStringType")
     //activeRecipe("org.openrewrite.staticanalysis.NoValueOfOnStringType")
     activeRecipe("org.openrewrite.gradle.GradleBestPractices")
-    activeRecipe("org.openrewrite.staticanalysis.UnnecessaryCloseInTryWithResources")
-    activeRecipe("org.openrewrite.staticanalysis.UnnecessaryReturnAsLastStatement")
-    activeRecipe("tech.picnic.errorprone.refasterrules.FileRulesRecipes")
+    activeRecipe("org.openrewrite.java.RemoveUnusedImports")
+    activeRecipe("org.openrewrite.staticanalysis.RemoveUnusedPrivateMethods")
     // bug
     exclusions.add("**StatisticsImpl.java")
     exclusions.add("**RevisionsOfEntityQuery.java")
