@@ -1,0 +1,18 @@
+project.apply(plugin: "org.openrewrite.rewrite")
+
+dependencies {
+	rewrite("org.openrewrite.recipe:rewrite-static-analysis:2.23.0")
+//	rewrite("org.openrewrite.recipe:rewrite-testing-frameworks:3.23.0")
+//	rewrite("org.openrewrite.recipe:rewrite-migrate-java:3.23.0")
+}
+
+repositories {
+	mavenCentral()
+}
+
+rewrite {
+	activeRecipe("org.hibernate.openrewrite.SanityCheck")
+	configFile = project.getRootProject().file("${rootDir}/gradle/sanity.yml")
+	setExportDatatables(true)
+	setFailOnDryRunResults(true)
+}

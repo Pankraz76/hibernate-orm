@@ -1,0 +1,21 @@
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: org.hibernate.openrewrite.SanityCheck
+displayName: Apply all common best practices
+description: Comprehensive code quality recipe combining modernization, security, and best practices.
+recipeList:
+  - org.openrewrite.java.format.RemoveTrailingWhitespace
+# - org.openrewrite.staticanalysis.EqualsAvoidsNull
+# - org.openrewrite.java.migrate.lang.var.UseVarForGenericMethodInvocations # bug;
+# - org.openrewrite.java.migrate.lang.var.UseVarForGenericsConstructors # 700 changes...
+# - org.openrewrite.java.migrate.lang.var.UseVarForObject # 6k changes...
+# - org.openrewrite.java.migrate.lang.var.UseVarForPrimitive # 1,8k changes...
+# - org.openrewrite.java.testing.junit.JupiterBestPractices
+# - org.openrewrite.java.testing.junit5.CleanupAssertions
+# - org.openrewrite.staticanalysis.RemoveUnusedPrivateMethods
+# - tech.picnic.errorprone.refasterrules.EqualityRulesRecipes
+# - tech.picnic.errorprone.refasterrules.NullRulesRecipes
+# - tech.picnic.errorprone.refasterrules.StreamRulesRecipes
+# - tech.picnic.errorprone.refasterrules.StringRulesRecipes
+# - tech.picnic.errorprone.refasterrules.TimeRulesRecipes
+---
