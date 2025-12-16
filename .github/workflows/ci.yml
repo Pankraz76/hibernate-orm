@@ -1,4 +1,4 @@
-name: GH Actions CI
+name: GH Actions CI ♻️
 
 on:
   push:
@@ -33,7 +33,7 @@ jobs:
   build:
     permissions:
       contents: read
-    name: OpenJDK 25 - ${{matrix.rdbms}}
+    name: OpenJDK - 🟢 ${{matrix.rdbms}}
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -57,19 +57,19 @@ jobs:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           persist-credentials: false
-      - name: Reclaim Disk Space
+      - name: Reclaim Disk Space 💾
         run: .github/ci-prerequisites.sh
-      - name: Start database
+      - name: Start database 🗄️
         env:
           RDBMS: ${{ matrix.rdbms }}
         run: ci/database-start.sh
-      - name: Set up Java 25
+      - name: Set up Java 25 ☕️
         uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00 # v4.7.1
         with:
           distribution: 'temurin'
           java-version: '25'
 
-      - name: Generate cache key
+      - name: Generate cache key 🔑
         id: cache-key
         run: |
           CURRENT_BRANCH="${{ github.repository != 'hibernate/hibernate-orm' && 'fork' || github.base_ref || github.ref_name }}"
@@ -79,7 +79,7 @@ jobs:
           echo "buildtool-monthly-cache-key=${ROOT_CACHE_KEY}-${CURRENT_MONTH}" >> $GITHUB_OUTPUT
           echo "buildtool-monthly-branch-cache-key=${ROOT_CACHE_KEY}-${CURRENT_MONTH}-${CURRENT_BRANCH}" >> $GITHUB_OUTPUT
           echo "buildtool-cache-key=${ROOT_CACHE_KEY}-${CURRENT_MONTH}-${CURRENT_BRANCH}-${CURRENT_DAY}" >> $GITHUB_OUTPUT
-      - name: Cache Maven/Gradle Dependency/Dist Caches
+      - name: Cache Maven/Gradle Dependency/Dist Caches 📦
         id: cache-maven
         uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4.2.3
         # if it's not a pull request, we restore and save the cache
@@ -97,7 +97,7 @@ jobs:
           restore-keys: |
             ${{ steps.cache-key.outputs.buildtool-monthly-branch-cache-key }}-
             ${{ steps.cache-key.outputs.buildtool-monthly-cache-key }}-
-      - name: Restore Maven/Gradle Dependency/Dist Caches
+      - name: Restore Maven/Gradle Dependency/Dist Caches 📥
         uses: actions/cache/restore@5a3ec84eff668545956fd18022155c47e93e2684 # v4.2.3
         # if it a pull request, we restore the cache but we don't save it
         if: github.event_name == 'pull_request'
@@ -112,7 +112,7 @@ jobs:
             ${{ steps.cache-key.outputs.buildtool-monthly-branch-cache-key }}-
             ${{ steps.cache-key.outputs.buildtool-monthly-cache-key }}-
 
-      - name: Run build script
+      - name: Run build script 🏗️
         run: ./ci/build-github.sh
         shell: bash
         env:
@@ -125,21 +125,21 @@ jobs:
       # For jobs running on 'pull_request', upload build scan data.
       # The actual publishing must be done in a separate job (see ci-report.yml).
       # We don't write to the remote cache as that would be unsafe.
-      - name: Upload GitHub Actions artifact for the Develocity build scan
+      - name: Upload GitHub Actions artifact for the Develocity build scan 📤
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         if: "${{ github.event_name == 'pull_request' && !cancelled() }}"
         with:
           name: build-scan-data-${{ matrix.rdbms }}
           path: ~/.gradle/build-scan-data
 
-      - name: Upload test reports (if Gradle failed)
+      - name: Upload test reports (if Gradle failed) 📊
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         if: failure()
         with:
           name: test-reports-java11-${{ matrix.rdbms }}
           path: |
             ./**/target/reports/tests/
-      - name: Omit produced artifacts from build cache
+      - name: Omit produced artifacts from build cache 🧹
         run: ./ci/before-cache.sh
 
   # Job for builds on Oracle TP infrastructure.
@@ -147,7 +147,7 @@ jobs:
   otp:
     permissions:
       contents: read
-    name: GraalVM 25 - ${{matrix.rdbms}}
+    name: GraalVM - 🟦 ${{matrix.rdbms}}
     runs-on: [ self-hosted, Linux, X64, OracleTestPilot ]
     strategy:
       fail-fast: false
@@ -161,12 +161,12 @@ jobs:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           persist-credentials: false
-      - name: Set up Java 25
+      - name: Set up Java 25 ☕️
         uses: graalvm/setup-graalvm@aafbedb8d382ed0ca6167d3a051415f20c859274 # v1.2.8
         with:
           distribution: 'graalvm'
           java-version: '25'
-      - name: Generate cache key
+      - name: Generate cache key 🔑
         id: cache-key
         run: |
           CURRENT_BRANCH="${{ github.repository != 'hibernate/hibernate-orm' && 'fork' || github.base_ref || github.ref_name }}"
@@ -176,7 +176,7 @@ jobs:
           echo "buildtool-monthly-cache-key=${ROOT_CACHE_KEY}-${CURRENT_MONTH}" >> $GITHUB_OUTPUT
           echo "buildtool-monthly-branch-cache-key=${ROOT_CACHE_KEY}-${CURRENT_MONTH}-${CURRENT_BRANCH}" >> $GITHUB_OUTPUT
           echo "buildtool-cache-key=${ROOT_CACHE_KEY}-${CURRENT_MONTH}-${CURRENT_BRANCH}-${CURRENT_DAY}" >> $GITHUB_OUTPUT
-      - name: Cache Maven/Gradle Dependency/Dist Caches
+      - name: Cache Maven/Gradle Dependency/Dist Caches 📦
         id: cache-maven
         uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4.2.3
         # if it's not a pull request, we restore and save the cache
@@ -194,7 +194,7 @@ jobs:
           restore-keys: |
             ${{ steps.cache-key.outputs.buildtool-monthly-branch-cache-key }}-
             ${{ steps.cache-key.outputs.buildtool-monthly-cache-key }}-
-      - name: Restore Maven/Gradle Dependency/Dist Caches
+      - name: Restore Maven/Gradle Dependency/Dist Caches 📥
         uses: actions/cache/restore@5a3ec84eff668545956fd18022155c47e93e2684 # v4.2.3
         # if it is a pull request, we restore the cache but we don't save it
         if: github.event_name == 'pull_request'
@@ -216,7 +216,7 @@ jobs:
           action: create
           user: hibernate_orm_test_1,hibernate_orm_test_2,hibernate_orm_test_3,hibernate_orm_test_4
 
-      - name: Run build script
+      - name: Run build script 🏗️
         env:
           RDBMS: ${{ matrix.rdbms }}
           RUNID: ${{ github.run_number }}
@@ -242,41 +242,41 @@ jobs:
       # The actual publishing must be done in a separate job (see ci-report.yml).
       # We don't write to the remote cache as that would be unsafe.
       # That's even on push, because we do not trust Atlas runners to hold secrets: they are shared infrastructure.
-      - name: Upload GitHub Actions artifact for the Develocity build scan
+      - name: Upload GitHub Actions artifact for the Develocity build scan 📤
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         if: "${{ !cancelled() }}"
         with:
           name: build-scan-data-${{ matrix.rdbms }}
           path: ~/.gradle/build-scan-data
-      - name: Upload test reports (if Gradle failed)
+      - name: Upload test reports (if Gradle failed) 📊
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         if: failure()
         with:
           name: test-reports-java11-${{ matrix.rdbms }}
           path: |
             ./**/target/reports/tests/
-      - name: Omit produced artifacts from build cache
+      - name: Omit produced artifacts from build cache 🧹
         run: ./ci/before-cache.sh
 
   # Static code analysis check
   format_checks:
     permissions:
       contents: read
-    name: Static code analysis
+    name: Static code analysis 🔍
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           persist-credentials: false
-      - name: Reclaim disk space and sanitize user home
+      - name: Reclaim disk space and sanitize user home 💾
         run: .github/ci-prerequisites-atlas.sh
-      - name: Set up Java 25
+      - name: Set up Java 25 ☕️️
         uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00 # v4.7.1
         with:
           distribution: 'temurin'
           java-version: '25'
 
-      - name: Generate cache key
+      - name: Generate cache key 🔑
         id: cache-key
         run: |
           CURRENT_BRANCH="${{ github.repository != 'hibernate/hibernate-orm' && 'fork' || github.base_ref || github.ref_name }}"
@@ -286,7 +286,7 @@ jobs:
           echo "buildtool-monthly-cache-key=${ROOT_CACHE_KEY}-${CURRENT_MONTH}" >> $GITHUB_OUTPUT
           echo "buildtool-monthly-branch-cache-key=${ROOT_CACHE_KEY}-${CURRENT_MONTH}-${CURRENT_BRANCH}" >> $GITHUB_OUTPUT
           echo "buildtool-cache-key=${ROOT_CACHE_KEY}-${CURRENT_MONTH}-${CURRENT_BRANCH}-${CURRENT_DAY}" >> $GITHUB_OUTPUT
-      - name: Cache Maven/Gradle Dependency/Dist Caches
+      - name: Cache Maven/Gradle Dependency/Dist Caches 📦
         id: cache-maven
         uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4.2.3
         # if it's not a pull request, we restore and save the cache
@@ -304,7 +304,7 @@ jobs:
           restore-keys: |
             ${{ steps.cache-key.outputs.buildtool-monthly-branch-cache-key }}-
             ${{ steps.cache-key.outputs.buildtool-monthly-cache-key }}-
-      - name: Restore Maven/Gradle Dependency/Dist Caches
+      - name: Restore Maven/Gradle Dependency/Dist Caches 📥
         uses: actions/cache/restore@5a3ec84eff668545956fd18022155c47e93e2684 # v4.2.3
         # if it a pull request, we restore the cache but we don't save it
         if: github.event_name == 'pull_request'
@@ -319,7 +319,7 @@ jobs:
             ${{ steps.cache-key.outputs.buildtool-monthly-branch-cache-key }}-
             ${{ steps.cache-key.outputs.buildtool-monthly-cache-key }}-    
 
-      - name: Run build script
+      - name: Run build script 🏗️
         run: ./gradlew formatChecks
         env:
           # For jobs running on 'push', publish build scan and cache immediately.
@@ -327,22 +327,25 @@ jobs:
           POPULATE_REMOTE_GRADLE_CACHE: ${{ github.event_name == 'push' && github.repository == 'hibernate/hibernate-orm' && 'true' || 'false' }}
           DEVELOCITY_ACCESS_KEY: "${{ secrets.DEVELOCITY_ACCESS_KEY }}"
 
+      - name: Sanity Check 🦉
+        run: ./gradlew rewriteDryRun -Dorg.gradle.jvmargs=-Xmx3G
+
       # For jobs running on 'pull_request', upload build scan data.
       # The actual publishing must be done in a separate job (see ci-report.yml).
       # We don't write to the remote cache as that would be unsafe.
-      - name: Upload GitHub Actions artifact for the Develocity build scan
+      - name: Upload GitHub Actions artifact for the Develocity build scan 📤
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         if: "${{ github.event_name == 'pull_request' && !cancelled() }}"
         with:
           name: build-scan-data-sca
           path: ~/.gradle/build-scan-data
 
-      - name: Upload test reports (if Gradle failed)
+      - name: Upload test reports (if Gradle failed) 📊
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         if: failure()
         with:
           name: test-reports-java11-sca
           path: |
             ./**/target/reports/tests/
-      - name: Omit produced artifacts from build cache
+      - name: Omit produced artifacts from build cache 🧹
         run: ./ci/before-cache.sh
